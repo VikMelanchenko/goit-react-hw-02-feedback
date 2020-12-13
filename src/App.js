@@ -6,6 +6,8 @@ import Statistics from './components/Statistics/Statistics';
 
 import Notification from './components/Notification/Notification';
 
+import Section from './components/Section/Section';
+
 class App extends Component {
   state = {
     good: 0,
@@ -36,19 +38,23 @@ class App extends Component {
     console.log(this.state);
     return (
       <div>
-        <h1>Please leave feedback</h1>
-        <FeedbackOptions
-          options={['good', 'neutral', 'bad']}
-          onLeaveFeedback={this.onHandleIncrement}
-        />
-        <h1>Statistics</h1>
-        <Statistics
-          good={good}
-          neutral={neutral}
-          bad={bad}
-          total={total}
-          positivePercentage={positivePercentage}
-        />
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={['good', 'neutral', 'bad']}
+            onLeaveFeedback={this.onHandleIncrement}
+          />
+        </Section>
+
+        <Section title="Statistics">
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={total}
+            positivePercentage={positivePercentage}
+          />
+        </Section>
+
         <Notification message="No feedback given" />
       </div>
     );
