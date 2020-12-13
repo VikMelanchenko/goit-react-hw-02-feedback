@@ -2,23 +2,33 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-const ButtonCounter = ({ feedback, onLeaveFeedback }) => {
+import s from './Feedback.module.scss';
+
+// для генерации уникального id - с вебинара
+import shortid from 'shortid';
+
+// фрагмент
+const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
-    <button type="button" data-feedback={feedback} onClick={onLeaveFeedback}>
-      {feedback}
-    </button>
+    <>
+      {options.map((option) => (
+        <button
+          className={s.button}
+          key={shortid.generate()}
+          type="button"
+          name={option}
+          onClick={onLeaveFeedback}
+        >
+          {option}
+        </button>
+      ))}
+    </>
   );
 };
 
-const FeedbackOptions = ({ options, onLeaveFeedback }) => {
-  return options.map((option) => (
-    <ButtonCounter feedback={option} onLeaveFeedback={onLeaveFeedback} />
-  ));
-};
-
 FeedbackOptions.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string),
-  onLeaveFeedback: PropTypes.func,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
 };
 
 export default FeedbackOptions;

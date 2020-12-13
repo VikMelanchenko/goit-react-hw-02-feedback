@@ -15,16 +15,20 @@ class App extends Component {
     bad: 0,
   };
 
-  onHandleIncrement = ({ target }) => {
-    const { feedback } = target.dataset;
-    this.setState((prevState) => ({ [feedback]: prevState[feedback] + 1 }));
+  onHandleIncrement = (event) => {
+    const name = event.target.name;
+    this.setState((prevState) => ({
+      [name]: prevState[name] + 1,
+    }));
   };
 
+  // total count
   countTotalFeedback = () => {
     const { good, neutral, bad } = this.state;
     return good + neutral + bad;
   };
 
+  // persentage count
   countPositiveFeedbackPercentage = () => {
     const { good } = this.state;
     const total = this.countTotalFeedback();
